@@ -21,7 +21,7 @@ import com.suleyman.texteditor.adapter.FileListAdapter
 import com.suleyman.texteditor.model.FileItem
 import java.io.File
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FileListAdapter.FileClickListener {
 
     val REQUEST_WRITE_STORAGE = 1001
 
@@ -43,11 +43,13 @@ class MainActivity : AppCompatActivity() {
         rvFilesView.layoutManager = LinearLayoutManager(this)
         rvFilesView.setHasFixedSize(true)
 
-        filesAdapter = FileListAdapter(filesList)
-        
-
+        filesAdapter = FileListAdapter(filesList, this)
         rvFilesView.adapter = filesAdapter
 
+    }
+
+    override fun onClick(file: FileItem, pos: Int) {
+        Toast.makeText(this, "pos = $pos", Toast.LENGTH_SHORT).show()
     }
 
     private fun loadFilesInDirectory(filesList: ArrayList<FileItem>) {

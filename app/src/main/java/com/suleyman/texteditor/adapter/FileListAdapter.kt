@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.suleyman.texteditor.R
 import com.suleyman.texteditor.model.FileItem
 
-class FileListAdapter(val files: ArrayList<FileItem>): Adapter<FileListAdapter.FileViewHolder>() {
-
-    var listener: FileClickListener? = null
+class FileListAdapter(val files: ArrayList<FileItem>, var listener: FileClickListener?): Adapter<FileListAdapter.FileViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.file_item, parent, false)
@@ -19,7 +17,6 @@ class FileListAdapter(val files: ArrayList<FileItem>): Adapter<FileListAdapter.F
     }
 
     override fun onBindViewHolder(holder: FileViewHolder, position: Int) {
-
         val file = files[position]
 
         holder.fileName.text = file.name
